@@ -15,8 +15,11 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->group(['prefix'=>'api/v1'], function() use ($router){
+	$router->post('/users/login', 'UserController@getUser');
+});
 
-$router->group(['middleware'=>[], 'prefix'=>'api/v1'], function() use ($router){
+$router->group(['middleware'=>['auth'], 'prefix'=>'api/v1'], function() use ($router){
 
 	$router->get('/cotizaciones', 'CotizacionController@index');
 	$router->get('/cotizaciones/create', 'CotizacionController@create');
