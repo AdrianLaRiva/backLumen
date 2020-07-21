@@ -2,16 +2,15 @@
 
 namespace App;
 
-use App\Models\Notificacion;
-use App\Notifications\MyResetPassword;
-use App\Utils;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Database\Eloquent\Model;
+use Laravel\Lumen\Auth\Authorizable;
 
-class User extends Authenticatable
+class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use Notifiable;
-
+use Authenticatable, Authorizable;
     /**
      * The attributes that are mass assignable.
      *
@@ -19,8 +18,7 @@ class User extends Authenticatable
      */
 
     protected $fillable       = [
-        'name', 'rut', 'apellido', 'rol_id', 'cargo', 'email', 'telefono', 'movil', 'password', 'root', 'root_token', 'cliente_proveedor_id','firma','config_mail_host','config_mail_puerto','config_mail_email','config_mail_clave',
-    ];
+        'name', 'rut', 'apellido', 'rol_id', 'email', 'password', 'api_token','loged'];
 
     /**
      * The attributes that should be hidden for arrays.

@@ -20,14 +20,14 @@ $router->group(['prefix'=>'api/v1'], function() use ($router){
 });
 
 $router->group(['middleware'=>['auth'], 'prefix'=>'api/v1'], function() use ($router){
-
+    $router->post('/users/logout', 'UserController@logOut');
+	
 	$router->get('/cotizaciones', 'CotizacionController@index');
 	$router->get('/cotizaciones/create', 'CotizacionController@create');
 	$router->get('/cotizaciones/{id}', 'CotizacionController@show');
-	$router->post('/cotizaciones/{id}', 'CotizacionController@store');
-	$router->put('/cotizaciones/{id}', 'CotizacionController@update');
+	$router->post('/cotizaciones/store/store', 'CotizacionController@store');
 	$router->delete('/cotizaciones/{id}', 'CotizacionController@delete');
-
 	$router->get('/getComunas/{id}',  'CotizacionController@getComunas');
+
 
 });

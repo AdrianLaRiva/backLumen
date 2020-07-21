@@ -12,22 +12,15 @@ class Cotizacion extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = ['cliente',
-        'subtotal',
-        'total_neto',
-        'iva',
-        'total_bruto',
+        'persona_contacto',
+        'concepto',
+        'email_contacto',
+        'total',
         'estado_id',
-        'fecha',
-        'comentario',
         'comuna_id',
         'region_id'
     ];
 
-    public function clienteProveedor()
-    {
-
-        return $this->belongsTo('App\Models\ClienteProveedor', 'cliente_id', 'id');
-    }
 
     public function estado()
     {
@@ -35,11 +28,6 @@ class Cotizacion extends Model
         return $this->belongsTo('App\Models\Estado', 'estado_id', 'id');
     }
 
-    public function items()
-    {
-
-        return $this->hasMany('App\Models\ItemCotizacion', 'cotizacion_id', 'id');
-    }
 
     public function region(){
 
