@@ -19,13 +19,20 @@ class UserController extends Controller
                 $data = $request->json()->all()["data"];
             
                 $user = User::where('email', $data['email'])->first();
-                $user->loged = true;
-                $user->save();
-
-                if ($user && Hash::check($data['password'], $user->password)) {
-                    return response()->json($user, 200);
-                } else {
-                    return response()->json(['error' => 'No content'], 406);
+                if($user)
+                {
+                    
+                    if ($user && Hash::check($data['password'], $user->password)) {
+                         $user->loged = true;
+                        $user->save();
+                        return response()->json($user, 200);
+                    } else {
+                        return response()->json(['error' => 'No content'], 406);
+                    }
+                }
+                else
+                {
+                     return response()->json(['error' => 'email o clave invalida'], 406);
                 }
             } catch (ModelNotFoundException $e) {
                 return response()->json(['error' => 'No content'], 406);
